@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    <fieldset style="height: 50px; width: 250px">
+        <legend>Add new product</legend>
+        <input type="text" id="newProduct">
+        <input type="button" value="ADD" onclick="add()">
+    </fieldset>
+</form>
+<div>
+    <h2>Display All Product</h2><br/>
+    <table>
+        <tr>
+            <th><b>Number product</b></th>
+            <th><p id="numberProduct"></p></th>
+        </tr>
+    </table>
+    <table id="tableProduct"></table>
+</div>
+<br><br><br>
+<form>
+    <fieldset style="height: 50px; width: 250px">
+        <legend>Edit</legend>
+        <input type="text" id="inputEdit">
+        <input type="button" onclick="edit()" value="EDIT">
+    </fieldset>
+
+</form>
+<script>
+    let arr=["iPhone X", "iPhone XS", "iPhone XR","iPhone 7", "iPhone8", "Samsung S10","Samsung S9", "Samsung S8"];
+
+    function numberProduct(){
+        document.getElementById("numberProduct").innerHTML = arr.length+"Product";
+    }
+    function nameProduct(){
+        let name= ""+"<tr>";
+        for (i=0; i < arr.length; i++) {
+            name += "<td>" + arr[i] +"</td>"
+                +"<td>" + "<input type='button' value='Delete' onclick='deleteProduct(this.value)'>" + "</td>"
+                +"<td>" + "<input type='button' value='Edit' onclick='editProduct(this.value)'>" + "</td>";
+            name += "</tr>";
+            document.getElementById("tableProduct").innerHTML= name;
+            console.log(arr[i]);
+        }
+        numberProduct();
+
+    }
+    nameProduct();
+
+
+    // let inArr=document.getElementById("newProduct").value;
+    function add(){
+        let inArr=document.getElementById("newProduct").value;
+        arr.push(inArr);
+        document.getElementById("newProduct").value= "";
+        numberProduct();
+        nameProduct();
+    }
+
+    function deleteProduct(i) {
+            arr.splice(i, 1);
+        numberProduct();
+        nameProduct();
+    }
+    function editProduct(i) {
+        console.log(arr[i]);
+        document.getElementById("inputEdit").innerText= arr[i];
+    }
+
+</script>
+</body>
+</html>
